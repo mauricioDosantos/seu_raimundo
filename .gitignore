@@ -4,3 +4,7 @@ env
 .env
 *.json
 *.pyc
+.my_pass
+.pg_service.conf
+*.swp
+*/migrations/*

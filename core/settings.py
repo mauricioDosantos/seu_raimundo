@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #'jet',
+    'colorfield',
     # default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,8 +43,7 @@ INSTALLED_APPS = [
     # internal
     'blog',
     'catechism',
-    # external
-    'colorfield'
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -81,19 +82,31 @@ WSGI_APPLICATION = config('WSGI_APPLICATION')
 DATABASES = {
     'default': {
         'ENGINE': config('ENGINE'),
-        'USERNAME': config('USERNAME'),
-        'PORT': config('PORT'),
+        'NAME': config('NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('PASSWORD'),
         'HOST': config('HOST'),
-        'PASSWORD': config('PASSWORD')
+        'PORT': config('PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = config('AUTH_PASSWORD_VALIDATORS')
-
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': config('VALIDATOR_1'),
+    },
+    {
+        'NAME': config('VALIDATOR_2'),
+    },
+    {
+        'NAME': config('VALIDATOR_3'),
+    },
+    {
+        'NAME': config('VALIDATOR_4'),
+    }
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
