@@ -2,7 +2,5 @@ venv
 env
 .venv
 .env
-requirements.txt
-*.txt
 *.json
 *.pyc
