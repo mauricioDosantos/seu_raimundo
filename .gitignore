@@ -8,3 +8,5 @@ env
 .pg_service.conf
 *.swp
 */migrations/*
+uploads
+uploads/*
