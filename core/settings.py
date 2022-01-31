@@ -28,17 +28,26 @@ DEBUG = config('DEBUG', cast=bool)
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# admin sugestion
+# https://github.com/globophobe/django-semantic-admin
 
+
+# Application definition
 INSTALLED_APPS = [
+    #'jet',
+    'colorfield',
+    'tinymce',
+    # default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # internal
     'blog',
-    'catechism'
+    'catechism',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -77,19 +86,31 @@ WSGI_APPLICATION = config('WSGI_APPLICATION')
 DATABASES = {
     'default': {
         'ENGINE': config('ENGINE'),
-        'USERNAME': config('USERNAME'),
-        'PORT': config('PORT'),
+        'NAME': config('NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('PASSWORD'),
         'HOST': config('HOST'),
-        'PASSWORD': config('PASSWORD')
+        'PORT': config('PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = config('AUTH_PASSWORD_VALIDATORS')
-
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': config('VALIDATOR_1'),
+    },
+    {
+        'NAME': config('VALIDATOR_2'),
+    },
+    {
+        'NAME': config('VALIDATOR_3'),
+    },
+    {
+        'NAME': config('VALIDATOR_4'),
+    }
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -112,3 +133,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# media root
+MEDIA_ROOT = (BASE_DIR).joinpath('uploads/')
+
