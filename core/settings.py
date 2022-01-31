@@ -28,11 +28,15 @@ DEBUG = config('DEBUG', cast=bool)
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# admin sugestion
+# https://github.com/globophobe/django-semantic-admin
 
+
+# Application definition
 INSTALLED_APPS = [
     #'jet',
     'colorfield',
+    'tinymce',
     # default
     'django.contrib.admin',
     'django.contrib.auth',
