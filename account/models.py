@@ -6,17 +6,6 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 
 
-# limite de tentativas, não protege de brute force
-# retornar um PermissionDenied -> django não consulta outros backends
-# dados de sessão guardam o backend onde foi autenticado
-# references
-# https://docs.djangoproject.com/en/4.0/topics/auth/default/
-# https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#extending-user
-# https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#extending-user
-# https://medium.com/@gabrielfgularte/custom-user-model-no-django-d9bdf2838bd8
-# https://docs.djangoproject.com/en/4.0/topics/auth/passwords/
-
-
 class SuperUserCustom(AbstractBaseUser):
     email = models.EmailField(primary_key=True, unique=True)
     contato = models.CharField(max_length=500, blank=True, null=True)
@@ -50,4 +39,13 @@ class AuthBackend(BaseBackend):
             except (User.DoesNotExist, ValidationError):
                 return PermissionDenied
 
+# limite de tentativas, não protege de brute force
+# retornar um PermissionDenied -> django não consulta outros backends
+# dados de sessão guardam o backend onde foi autenticado
+# references
+# https://docs.djangoproject.com/en/4.0/topics/auth/default/
+# https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#extending-user
+# https://docs.djangoproject.com/en/4.0/topics/auth/customizing/#extending-user
+# https://medium.com/@gabrielfgularte/custom-user-model-no-django-d9bdf2838bd8
+# https://docs.djangoproject.com/en/4.0/topics/auth/passwords/
 '''

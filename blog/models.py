@@ -4,6 +4,8 @@ from django.db import models
 from colorfield.fields import ColorField
 from tinymce.models import HTMLField
 
+from account.models import SuperUserCustom
+
 
 # https://acervolima.com/como-integrar-o-editor-de-texto-personalizado-ao-seu-site-django/
 class Post(models.Model):
@@ -20,7 +22,7 @@ class Post(models.Model):
         'Attachment', verbose_name='Anexos', blank=True
     )
     user_id = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name='Autor'
+        SuperUserCustom, on_delete=models.CASCADE, verbose_name='Autor'
     )
     tag_id = models.ManyToManyField(
         'Tag', verbose_name='Categorias', blank=True
