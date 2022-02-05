@@ -17,7 +17,7 @@ from django.db import models
 # https://docs.djangoproject.com/en/4.0/topics/auth/passwords/
 
 
-class SuperUser(AbstractBaseUser):
+class SuperUserCustom(AbstractBaseUser):
     email = models.EmailField(primary_key=True, unique=True)
     contato = models.CharField(max_length=500, blank=True, null=True)
     active = models.BooleanField(default=True)
