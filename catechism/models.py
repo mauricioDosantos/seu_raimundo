@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.timezone import datetime
+from datetime import datetime
 
 
 class CatechismRegister(models.Model):
@@ -74,7 +75,8 @@ class CatechismRegister(models.Model):
         return self.id_fixa
 
     def __str__(self):
-        return self.nome_completo
+        idade = ((datetime.today().date() - self.data_nas) // 365).days
+        return f"{self.full_name} - {idade} anos"
 
 
 class Room(models.Model):
@@ -85,6 +87,8 @@ class Room(models.Model):
         max_length=300, default='Centro catequético - Matriz',
         verbose_name='Localização'
     )
+    def __str__(self):
+        return f'Sala {self.number} | {self.description}'
 
 
 class AgeGroup(models.Model):
@@ -98,17 +102,17 @@ class AgeGroup(models.Model):
 
 class CatechismCalss(models.Model):
     description = models.CharField(
-        max_lenght=500, verbose_name='Descrição da turma'
+        max_length=500, verbose_name='Descrição da turma'
     )
     year = models.DateField(blank=True, null=True)
     age_group_id = models.ForeignKey(
-        AgeGroup, verbose_name='Faixa etária'
+        AgeGroup, verbose_name='Faixa etária', on_delete=models.DO_NOTHING
     )
     room_id = models.ForeignKey(
-        Room, verbose_name='Local'
+        Room, verbose_name='Local', on_delete=models.DO_NOTHING
     )
     user_id = models.ManyToManyField(
-        'auth.User', blank=False, required=True, verbose_name='Catequistas'
+        'auth.User', blank=False, verbose_name='Catequistas'
     )
     catechism_register_id = models.ManyToManyField(
         CatechismRegister, blank=True, verbose_name='Catequisandos'
