@@ -23,7 +23,7 @@ class Post(models.Model):
     )
     user_id = models.ForeignKey(
         'accounts.UserCustom', on_delete=models.CASCADE,
-        verbose_name='Autor', related_name = 'Auth'
+        verbose_name='Autor'
     )
     tag_id = models.ManyToManyField(
         'Tag', verbose_name='Categorias', blank=True
