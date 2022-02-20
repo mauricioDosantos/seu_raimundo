@@ -1,8 +1,9 @@
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.db import models
 
 from colorfield.fields import ColorField
 from tinymce.models import HTMLField
+from accounts.models import UserCustom
 
 #from account.models import SuperUserCustom
 
@@ -22,7 +23,7 @@ class Post(models.Model):
         'Attachment', verbose_name='Anexos', blank=True
     )
     user_id = models.ForeignKey(
-        'accounts.UserCustom', on_delete=models.CASCADE,
+        UserCustom, on_delete=models.CASCADE,
         verbose_name='Autor'
     )
     tag_id = models.ManyToManyField(

@@ -22,20 +22,20 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
-    # 'jet',
+    # account app
+    'accounts',
+    # others
+    #'jet',
     'colorfield',
     'tinymce',
-    # default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # internal
     'blog',
-    'catechism',
-    'accounts'
+    'catechism'
 ]
 
 MIDDLEWARE = [
@@ -100,13 +100,10 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
-#AUTH_USER_MODEL = 'accounts.UserCustom'
+AUTH_USER_MODEL = 'accounts.UserCustom'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    #'accounts.auth.AuthBackend'
 ]
-#AUTHENTICATION_BACKENDS = ['accounts.auth.AuthBackend']
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
