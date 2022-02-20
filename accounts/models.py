@@ -46,7 +46,7 @@ class UserCustom(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         status = 'Desativado'
-        if self.active:
+        if self.is_active:
             status = 'Ativo'
 
         return f"{self.email} - {status}"
