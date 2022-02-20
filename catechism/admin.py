@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import Room, AgeGroup, CatechismCalss, CatechismRegister
 
-# Register your models here.
+
+admin.site.register(Room)
+admin.site.register(AgeGroup)
+admin.site.register(CatechismCalss)
+admin.site.register(CatechismRegister)

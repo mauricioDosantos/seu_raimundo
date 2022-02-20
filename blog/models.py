@@ -17,7 +17,7 @@ class Post(models.Model):
     publiched_date = models.DateTimeField(blank=True, null=True)
     active = models.BooleanField(default=True)
     email = models.EmailField(blank=True, null=True)
-    phone = models.IntegerField(blank=True, null=True)
+    phone = models.PositiveBigIntegerField(blank=True, null=True)
     instagram = models.CharField(max_length=100, blank=True, null=True)
     attachment_id = models.ManyToManyField(
         'Attachment', verbose_name='Anexos', blank=True
@@ -77,14 +77,15 @@ class Visualized(models.Model):
         return self.post_id.title
 
 
-class Contacts(models.Model):
+class Contact(models.Model):
     name = models.CharField(max_length=180)
-    phone = models.IntegerField(blank=True, null=True)
+    phone = models.PositiveBigIntegerField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     instragram = models.CharField(max_length=100, blank=True, null=True)
     facebook = models.CharField(max_length=500, blank=True, null=True)
-    whatsapp = models.IntegerField(blank=True, null=True)
+    whatsapp = models.PositiveBigIntegerField(blank=True, null=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
+
