@@ -21,4 +21,6 @@ urlpatterns = [
     #path('jet/', include('jet.urls', 'jet')),
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
+    #path('account/', include('account.urls')),
+    #path('account/', include('account.urls')),
 ]

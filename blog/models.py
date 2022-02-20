@@ -1,8 +1,11 @@
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.db import models
 
 from colorfield.fields import ColorField
 from tinymce.models import HTMLField
+from accounts.models import UserCustom
+
+#from account.models import SuperUserCustom
 
 
 # https://acervolima.com/como-integrar-o-editor-de-texto-personalizado-ao-seu-site-django/
@@ -17,16 +20,17 @@ class Post(models.Model):
     phone = models.IntegerField(blank=True, null=True)
     instagram = models.CharField(max_length=100, blank=True, null=True)
     attachment_id = models.ManyToManyField(
-        'Attachment', verbose_name='Anexos', blank=True, null=True
+        'Attachment', verbose_name='Anexos', blank=True
     )
     user_id = models.ForeignKey(
-        User, on_delete=models.CASCADE, verbose_name='Autor'
+        UserCustom, on_delete=models.CASCADE,
+        verbose_name='Autor'
     )
     tag_id = models.ManyToManyField(
-        'Tag', verbose_name='Categorias', blank=True, null=True
+        'Tag', verbose_name='Categorias', blank=True
     )
     area_id = models.ManyToManyField(
-        'AreaLabel', verbose_name='Area ou Pastoral', blank=True, null=True
+        'AreaLabel', verbose_name='Area ou Pastoral', blank=True
     )
 
     def __str__(self):
