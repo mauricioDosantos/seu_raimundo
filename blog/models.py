@@ -1,11 +1,8 @@
-#from django.contrib.auth.models import User
 from django.db import models
 
 from colorfield.fields import ColorField
 from tinymce.models import HTMLField
 from accounts.models import UserCustom
-
-#from account.models import SuperUserCustom
 
 
 # https://acervolima.com/como-integrar-o-editor-de-texto-personalizado-ao-seu-site-django/

@@ -19,8 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     #path('jet/', include('jet.urls', 'jet')),
+    path('', include('blog.urls')),
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
-    #path('account/', include('account.urls')),
     #path('account/', include('account.urls')),
 ]
