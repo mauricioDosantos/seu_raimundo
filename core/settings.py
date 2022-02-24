@@ -22,12 +22,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
-    # account app
     'accounts',
-    # others
-    #'jet',
-    'colorfield',
-    'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -35,7 +30,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'catechism'
+    'catechism',
+    'colorfield',
+    'tinymce',
 ]
 
 MIDDLEWARE = [

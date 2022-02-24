@@ -7,7 +7,9 @@ env
 .my_pass
 .pg_service.conf
 *.swp
-*/migrations/*
 uploads
 uploads/*
 recycling_html.txt
+lib64
+include
+pyvenv.cfg
