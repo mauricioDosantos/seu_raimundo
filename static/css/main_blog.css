@@ -1,3 +1,17 @@
 a {
     text-decoration: none;
 }
+
+@media screen and (max-width: 800px) {
+    .some_quando_pequeno {
+        display: None;
+        visibility: hidden;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .some_quando_grande {
+        display: None;
+        visibility: hidden;
+    }
+}
