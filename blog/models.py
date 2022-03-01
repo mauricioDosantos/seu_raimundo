@@ -1,8 +1,8 @@
 from django.db import models
 
-from colorfield.fields import ColorField
 from tinymce.models import HTMLField
 from accounts.models import UserCustom
+import re
 
 
 # https://acervolima.com/como-integrar-o-editor-de-texto-personalizado-ao-seu-site-django/
@@ -23,15 +23,18 @@ class Post(models.Model):
         UserCustom, on_delete=models.CASCADE,
         verbose_name='Autor'
     )
-    tag_id = models.ManyToManyField(
-        'Tag', verbose_name='Categorias', blank=True
-    )
-    area_id = models.ManyToManyField(
-        'AreaLabel', verbose_name='Area ou Pastoral', blank=True
+    tag = models.ForeignKey(
+        'Tag', verbose_name='Categorias', blank=True,
+        on_delete=models.CASCADE
     )
 
     def __str__(self):
         return self.title
+
+    def generate_summary(self):
+        text = self.text[:300]
+        text = re.sub('<[^>]+?>', '', text)
+        return text.strip() + '...'
 
 
 class Attachment(models.Model):
@@ -46,16 +49,6 @@ class Attachment(models.Model):
 # https://pypi.org/project/django-rgbfield/
 class Tag(models.Model):
     name = models.CharField(max_length=80)
-    color = ColorField()
-    active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.name
-
-
-class AreaLabel(models.Model):
-    name = models.CharField(max_length=80)
-    color = ColorField()
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -66,7 +59,7 @@ class AreaLabel(models.Model):
 class Visualized(models.Model):
     ref_date = models.DateField()
     count = models.IntegerField(blank=True, null=True)
-    post_id = models.ForeignKey(
+    post = models.ForeignKey(
         'Post', on_delete=models.CASCADE, verbose_name='Postagem'
     )
 
