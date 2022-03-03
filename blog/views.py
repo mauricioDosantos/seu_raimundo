@@ -9,15 +9,17 @@ def description_replace():
     return
 
 
-
 def main(request):
     pub = Post.objects.filter(active=True).order_by('-publiched_date')
-    first_pub = Post.objects.order_by('-publiched_date').first()
+    first_pub = Post.objects.filter(
+        active=True
+    ).order_by('-publiched_date').first()
+
+    if not first_pub:
+        return render(request, 'no_pubs.html')
+
     all_pub = pub.exclude(id=first_pub.id)
-
-    #ipdb.set_trace()
     atts = Attachment.objects.order_by('-id')[:10]
-
     contacts = Contact.objects.all()
 
     context = {
