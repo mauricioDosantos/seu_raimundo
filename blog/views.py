@@ -14,6 +14,7 @@ def main(request):
     first_pub = Post.objects.filter(
         active=True
     ).order_by('-publiched_date').first()
+    ipdb.set_trace()
 
     if not first_pub:
         return render(request, 'no_pubs.html')
@@ -30,3 +31,20 @@ def main(request):
     }
 
     return render(request, 'index.html', context)
+
+
+def one_post(request, post_id=None):
+
+    #ipdb.set_trace()
+    if post_id.isnumeric():
+        post_id = int(post_id)
+    else:
+        render(request, 'no_pubs.html')
+
+    pub = Post.objects.filter(id=post_id).first()
+
+    context = {
+        'post': pub,
+    }
+
+    return render(request, 'post_details.html', context)
