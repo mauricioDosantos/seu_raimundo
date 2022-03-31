@@ -36,21 +36,33 @@
   </head>
 <body>
 
-<!-- HEADER --!>    
+<!-- HEADER -->    
 {% include 'partials/header.html' %}
-<!-- HEADER --!>    
+<!-- HEADER -->    
 
+<!-- MENU -->	
+<div class="col-2 some_quando_grande">
+  <button class="btn btn-light" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" data-bs-autoClose="true">
+    <img src="https://img.icons8.com/ios-glyphs/30/000000/menu--v1.png"/>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuButton2">
+    <li><a class="dropdown-item active" href="#">Arquivos</a></li>
+    <li><a class="dropdown-item" href="#">Sobre</a></li>
+    <li><a class="dropdown-item" href="#">Contatos</a></li>
+  </ul>
+</div>
+<!-- MENU -->	
 <main class="container">
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
     <div class="col-md-6 px-0">
     <h1 class="display-4 fst-italic">{{ first_pub.title }}</h1>
     <p class="lead my-3"> {{ first_pub.generate_summary }} </p>
-      <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+      <p class="lead mb-0"><a href="article/{{ first_pub.id }}" class="text-white fw-bold">Continue reading...</a></p>
     </div>
   </div>
 
   <div class="row">
-    <!-- col-md-6 --!>
+    <!-- col-md-6 -->
     <div class="col">
 
         {% for pub in posts %}
@@ -59,13 +71,13 @@
                 <div class="col p-4 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary">{{ pub.tag }}</strong>
                   <h3 class="mb-0">{{ pub.title }}</h3>
-                  <div class="mb-1 text-muted">{{ pub.publiched_date}}</div>
-                  <p class="card-text mb-auto">{{ pub.generate_summary }}</p>
-                  <a href="#" class="stretched-link">Continue reading</a>
+                  <div class="mb-1 text-muted">{{ pub.publiched_date|date}}</div>
+                  <p class="card-text mb-auto">{{ pub.generate_summary|safe }}</p>
+                  <a href="article/{{ pub.id }}" class="stretched-link">Continue reading</a>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                 <img src="{{ pub.image }}" alt="{{ pub.image }}" width="200" height="250">
-                    <!--<svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> --!>
+                    <!--<svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
 
                 </div>
               </div>
@@ -74,7 +86,7 @@
 
     </div>
 
-  <!-- ABOUT --!>
+  <!-- ABOUT -->
     <div class="col-md-4 some_quando_pequeno">
 
         <div class='row'>
@@ -108,14 +120,14 @@
         </div>
 
     </div>
-  <!-- ABOUT --!>
+  <!-- ABOUT -->
   </div>
 
 </main>
 
-<!-- FOOTER --!>
+<!-- FOOTER -->
 {% include 'partials/footer.html' %}
-<!-- FOOTER --!>
+<!-- FOOTER -->
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.esm.min.js' %}"></script>

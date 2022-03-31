@@ -28,3 +28,23 @@ def main(request):
     }
 
     return render(request, 'index.html', context)
+
+def article(request, articleId):
+    #ipdb.set_trace()
+    pub = Post.objects.filter(active=True).order_by('-publiched_date')
+    first_pub = Post.objects.order_by('-publiched_date').first()
+    all_pub = pub.exclude(id=first_pub.id)
+    atts = Attachment.objects.order_by('-id')[:10]
+    article = Post.objects.get(id=articleId) #get object or 404
+    contacts = Contact.objects.all()
+
+
+    context = {
+        'id': articleId,
+        'article': article,
+        'posts': all_pub,
+        'first_pub': first_pub,
+        'attachments': atts,
+        'contacts': contacts
+    }
+    return render(request, 'article.html', context)
