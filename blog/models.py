@@ -7,6 +7,9 @@ import re
 
 # https://acervolima.com/como-integrar-o-editor-de-texto-personalizado-ao-seu-site-django/
 class Post(models.Model):
+    id = models.AutoField(primary_key=True)
+
+
     title = models.CharField(max_length=250)
     text = HTMLField()
     image = models.ImageField(blank=True, null=True)
@@ -23,9 +26,8 @@ class Post(models.Model):
         UserCustom, on_delete=models.CASCADE,
         verbose_name='Autor'
     )
-    tag = models.ForeignKey(
+    tag = models.ManyToManyField(
         'Tag', verbose_name='Categorias', blank=True,
-        on_delete=models.CASCADE
     )
 
     def __str__(self):
@@ -78,4 +80,3 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
-
