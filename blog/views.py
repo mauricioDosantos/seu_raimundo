@@ -21,7 +21,7 @@ def main(request):
     contacts = Contact.objects.all()
 
     context = {
-        'posts': all_pub,
+        'posts': pub,
         'first_pub': first_pub,
         'attachments': atts,
         'contacts': contacts
@@ -29,18 +29,31 @@ def main(request):
 
     return render(request, 'index.html', context)
 
+<<<<<<< HEAD
+def article(request, URLTitle):
+    #ipdb.set_trace()
+    URLT = URLTitle.replace('-',' ')
+=======
 def article(request, articleId):
     #ipdb.set_trace()
+>>>>>>> origin
     pub = Post.objects.filter(active=True).order_by('-publiched_date')
     first_pub = Post.objects.order_by('-publiched_date').first()
     all_pub = pub.exclude(id=first_pub.id)
     atts = Attachment.objects.order_by('-id')[:10]
+<<<<<<< HEAD
+    article = Post.objects.get(title=URLT) #get object or 404
+    contacts = Contact.objects.all()
+
+    context = {
+=======
     article = Post.objects.get(id=articleId) #get object or 404
     contacts = Contact.objects.all()
 
 
     context = {
         'id': articleId,
+>>>>>>> origin
         'article': article,
         'posts': all_pub,
         'first_pub': first_pub,

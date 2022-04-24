@@ -1,3 +1,5 @@
+from pyexpat import model
+from tabnanny import verbose
 from django.db import models
 
 from tinymce.models import HTMLField
@@ -8,10 +10,14 @@ import re
 # https://acervolima.com/como-integrar-o-editor-de-texto-personalizado-ao-seu-site-django/
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> origin
     title = models.CharField(max_length=250)
     text = HTMLField()
+    main_idea = models.TextField(max_length=500,verbose_name='Ideia Central do Texto')
     image = models.ImageField(blank=True, null=True)
     register_date = models.DateTimeField(auto_now_add=True)
     publiched_date = models.DateTimeField(blank=True, null=True)
@@ -26,6 +32,13 @@ class Post(models.Model):
         UserCustom, on_delete=models.CASCADE,
         verbose_name='Autor'
     )
+<<<<<<< HEAD
+    
+    main_tag = models.ForeignKey('Tag', verbose_name='Tag Principal',on_delete=models.CASCADE, related_name='Main_Tag', default=1)
+
+
+=======
+>>>>>>> origin
     tag = models.ManyToManyField(
         'Tag', verbose_name='Categorias', blank=True,
     )
@@ -34,9 +47,22 @@ class Post(models.Model):
         return self.title
 
     def generate_summary(self):
-        text = self.text[:300]
-        text = re.sub('<[^>]+?>', '', text)
-        return text.strip() + '...'
+        main_idea = self.main_idea[:300]
+        main_idea = re.sub('<[^>]+?>', '', main_idea)
+        return main_idea.strip() + '...'
+
+    # DÁ PROBLEMA COM PALAVRAS QUE JÁ TEM UM HIFEN
+    def generate_url(self):
+        title = self.title.replace(' ','-').strip()
+        return title
+    # TESTAR OS DIFERENTES TITULOS PRA NÃO DAR MERDA DEPOIS
+    def generate_title(self):
+        if len(self.title) > 50:
+            title = self.title[:40].strip() + '...'
+            return title
+        else:
+            return self.title
+
 
 
 class Attachment(models.Model):
