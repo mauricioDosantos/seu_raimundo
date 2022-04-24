@@ -10,6 +10,11 @@ import re
 # https://acervolima.com/como-integrar-o-editor-de-texto-personalizado-ao-seu-site-django/
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin
     title = models.CharField(max_length=250)
     text = HTMLField()
     main_idea = models.TextField(max_length=500,verbose_name='Ideia Central do Texto')
@@ -27,10 +32,13 @@ class Post(models.Model):
         UserCustom, on_delete=models.CASCADE,
         verbose_name='Autor'
     )
+<<<<<<< HEAD
     
     main_tag = models.ForeignKey('Tag', verbose_name='Tag Principal',on_delete=models.CASCADE, related_name='Main_Tag', default=1)
 
 
+=======
+>>>>>>> origin
     tag = models.ManyToManyField(
         'Tag', verbose_name='Categorias', blank=True,
     )
