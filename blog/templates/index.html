@@ -1,123 +1,140 @@
-{% load static %}
+{%load static%}
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>São Raimundo Nonato</title>
+  <!-- ======= Head ======= -->
+  {% include 'partials/head.html' %}
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/blog/">
+  <body>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    <!-- ======= Header ======= -->
+    {% include 'partials/header.html' %}
+    
+    <main id="main">
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+      <!-- ======= Hero Slider Section ======= -->
+      <section id="hero-slider" class="hero-slider">
+        <div class="container-md" data-aos="fade-in">
+          <div class="row">
+            <div class="col-12">
+              <div class="swiper sliderFeaturedPosts">
+                <div style="max-height: 450px;" class="swiper-wrapper">
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-    <!-- Custom styles for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/blog.css'%}" rel="stylesheet">
-    <link href="{% static 'css/main_blog.css'%}" rel="stylesheet">
-  </head>
-<body>
-
-<!-- HEADER --!>    
-{% include 'partials/header.html' %}
-<!-- HEADER --!>    
-
-<main class="container">
-  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
-    <div class="col-md-6 px-0">
-    <h1 class="display-4 fst-italic">{{ first_pub.title }}</h1>
-    <p class="lead my-3"> {{ first_pub.generate_summary }} </p>
-      <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
-    </div>
-  </div>
-
-  <div class="row">
-    <!-- col-md-6 --!>
-    <div class="col">
-
-        {% for pub in posts %}
-            <div class="row">
-              <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary">{{ pub.tag }}</strong>
-                  <h3 class="mb-0">{{ pub.title }}</h3>
-                  <div class="mb-1 text-muted">{{ pub.publiched_date}}</div>
-                  <p class="card-text mb-auto">{{ pub.generate_summary }}</p>
-                  <a href="#" class="stretched-link">Continue reading</a>
-                </div>
-                <div class="col-auto d-none d-lg-block">
-                <img src="{{ pub.image }}" alt="{{ pub.image }}" width="200" height="250">
-                    <!--<svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> --!>
+                  <!-- PEGAR SO OS 3 OU 4 -->
+                  {% for pub in posts %}
+                    <div  class="swiper-slide">
+                      <a href="article/{{pub.generate_url}}" class="img-bg d-flex align-items-end" style="background-image: url('{{pub.image.url}}');">
+                        <div class="img-bg-inner">
+                          <h2 id="index">{{ pub.generate_title|title }}</h2>
+                          <p>{{ pub.generate_summary|safe }}</p>
+                        </div>
+                      </a>
+                    </div>
+                  {% endfor %}
 
                 </div>
+                <div class="custom-swiper-button-next">
+                  <span class="bi-chevron-right"></span>
+                </div>
+                <div class="custom-swiper-button-prev">
+                  <span class="bi-chevron-left"></span>
+                </div>
+
+                <div class="swiper-pagination"></div>
               </div>
-            </div>
-        {% endfor %}
-
-    </div>
-
-  <!-- ABOUT --!>
-    <div class="col-md-4 some_quando_pequeno">
-
-        <div class='row'>
-          <div class="position-sticky" style="top: 2rem;">
-            <div class="p-4 mb-3 bg-light rounded">
-              <h4 class="fst-italic">Sobre</h4>
-              <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
-            </div>
-
-            <div class="p-4">
-              <h4 class="fst-italic">Arquivos</h4>
-              <ol class="list-unstyled mb-0">
-                {% for attach in attachments %}
-                    <li><a href="{{ attach.item }}">{{ attach.name }}</a></li>
-                {% endfor %}
-              </ol>
-            </div>
-
-            <div class="p-4">
-              <h4 class="fst-italic">Contatos Paroquiais</h4>
-              {% for ctt in contacts %}
-              <p class="mb-0">{{ ctt.name }}</p>
-              <ol class="list-unstyled">
-              <li><a href="{{ctt.instragram}}">Instagram - {{ctt.instragram}}</a></li>
-              <li><a href="{{ctt.whatsapp}}">WhatsApp - {{ctt.whatsapp}}</a></li>
-              <li><a href="{{ctt.facebook}}">Facebook - {{ctt.facebook}}</a></li>
-              </ol>
-              {% endfor %}
             </div>
           </div>
         </div>
+      </section><!-- End Hero Slider Section -->
 
-    </div>
-  <!-- ABOUT --!>
-  </div>
+      
+      <!-- ======= Culture Category Section ======= -->
+      <section style="margin-bottom:50px ;" class="category-section">
+        <div class="container" data-aos="fade-up">
 
-</main>
+          <!-- <div class="section-header d-flex justify-content-between align-items-center mb-5">
+            <h2>Culture</h2>
+            <div><a href="category.html" class="more">See All Culture</a></div>
+          </div> -->
 
-<!-- FOOTER --!>
-{% include 'partials/footer.html' %}
-<!-- FOOTER --!>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.esm.min.js' %}"></script>
-</body>
+          <div class="row">
+
+            <div class="col-md-9">            
+              {% for pub in page_pub %}
+                <div class="d-lg-flex post-entry-2">
+
+                    <a style="max-width: 500px;" href="article/{{pub.generate_url}}" class="me-4 thumbnail mb-4 mb-lg-0">
+                      <img class="cover-index"  src="{{pub.image.url}}">
+                    </a>
+
+                    <!-- OLD IMAGE -->
+                    <!-- <a style="max-width: 500px;" href="article/{{pub.generate_url}}" class="me-4 thumbnail mb-4 mb-lg-0">
+                      <img style="object-position: top; object-fit: cover;" src="{{pub.image.url}}" alt="" class="img-fluid">
+                    </a> -->
+                  
+                  <div class="index_card">
+                    <div style="margin-top:5px" class="post-meta">
+                      <span class="date">{{ pub.main_tag.name }}</span>
+                      <span class="mx-1">&bullet;</span>
+                      <span>{{ pub.publiched_date|date }}</span>
+                    </div>
+                    <h3  id="index"><a href="article/{{pub.generate_url}}">{{pub.generate_title|title}}</a></h3>
+                    <p style="margin-bottom:0px ;">{{pub.generate_summary|safe}}</p>
+                  </div>
+
+                </div>              
+              {% endfor %}            
+            </div>
+
+
+              <!-- CONTEUDO ESTATICO -->
+            <div class="col-md-3">
+              <div class="post-entry-1 border-bottom">
+                <img src="{%static 'img/santo.png'%}" alt="">
+                <!-- <a href="article/"><img src="{% static 'img/post-landscape-1.jpg'%}" alt="" class="img-fluid"></a>
+                <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                <h2 id="index" class="mb-2"><a href="article/">11 Work From Home Part-Time Jobs You Can Do Now</a></h2>
+                <span class="author mb-3 d-block">Jenny Wilson</span>
+                <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero temporibus repudiandae, inventore pariatur numquam cumque possimus</p> -->
+              </div>
+              <div style="margin-bottom: 0px;" class="form-group row">
+                <ul style="margin-bottom: 0px;"  class="aside-tags list-unstyled">
+                  {%for tag in tags%}
+                  <li><a href="/search/?search_field={{tag.name}}">{{tag.name}}</a></li>
+                  {%endfor%}
+                </ul>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section><!-- End Culture Category Section -->
+
+
+      <!-- PAGINAÇÃO -->
+      <div class="text-center py-4">
+        <div class="custom-pagination">
+          <a href="#" class="prev">&lt;</a>
+
+          {%for pagina in page_pub.paginator.page_range %}
+            {% if page_pub.number == pagina %} 
+              <a href="?page={{pagina}}" class="active">{{pagina}}</a>
+            {%else%}
+              <a href="?page={{pagina}}">{{pagina}}</a>
+            {%endif%}
+          {%endfor%}
+
+          <a href="#" class="next">&gt;</a>
+        </div>
+      </div>
+
+      <!-- OK NADA A MAIS PARA BAIXO -->
+
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    {%include 'partials/footer.html'%}
+  </body>
+
 </html>

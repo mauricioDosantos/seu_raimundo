@@ -2,6 +2,7 @@ from django.contrib.auth.models import (
     AbstractBaseUser, PermissionsMixin, BaseUserManager
 )
 from django.db import models
+from django.utils import timezone
 
 
 # https://docs.djangoproject.com/en/4.0/topics/auth/customizing/
@@ -26,7 +27,7 @@ class UserCustomManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
+#Aqui colocar os campos extras do redator
 class UserCustom(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         max_length=300, unique=True, verbose_name='Email'
@@ -40,6 +41,21 @@ class UserCustom(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(
         default=False, verbose_name='Administrador?'
     )
+
+    #Edit Pabllo
+    photo = models.ImageField(blank=True, upload_to='uploads/userPhoto')
+    name = models.CharField(blank=True, max_length=250)
+    phone = models.CharField(blank=True, max_length=250)
+    create_date = models.DateField(blank=True, default = timezone.now)
+    bio = models.TextField(blank=True)
+    #grupo_pastoral = foreingkey
+
+
+
+    #End Edit Pabllo
+
+
+
 
     objects = UserCustomManager()
 
